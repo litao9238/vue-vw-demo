@@ -1,6 +1,8 @@
 
-const autoprefixer = require('autoprefixer');
-const pxtoviewport = require('postcss-px-to-viewport');
+const pxtoviewport = require('postcss-px-to-viewport')
+const pxtorem = require('postcss-pxtorem')
+const writesvg = require('postcss-write-svg')
+const viewportUnits = require('postcss-viewport-units')
 
 module.exports = {
   devServer: {
@@ -11,7 +13,15 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [
-          autoprefixer(),
+          // 转rem
+          // pxtorem({
+          //   rootValue: 37.5,
+          //   propList: ['*']
+          // }),
+          viewportUnits({}),
+          writesvg({
+            utf8: false
+          }),
           pxtoviewport({
             unitToConvert: "px",
             viewportWidth: 375,// vant 需要设置成375

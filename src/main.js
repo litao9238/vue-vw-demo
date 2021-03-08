@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import 'amfe-flexible'
+
 import { Tabbar, TabbarItem, Button } from 'vant';
 
 Vue.use(Tabbar);
