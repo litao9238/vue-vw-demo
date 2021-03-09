@@ -1,13 +1,27 @@
-
 const pxtoviewport = require('postcss-px-to-viewport')
 const pxtorem = require('postcss-pxtorem')
 const writesvg = require('postcss-write-svg')
 const viewportUnits = require('postcss-viewport-units')
 
+
+// 是否为生产环境
+const isProduction = process.env.NODE_ENV !== 'development';
+// 版本号
+const webpackPluginVersion = require('./WebpackPluginVersion');
+
 module.exports = {
   devServer: {
     port: 8077,
     disableHostCheck: true,
+  },
+  configureWebpack: (config) => {
+    // 生产环境相关配置
+    if (isProduction) {
+      config.plugins.push(
+        // 版本号
+        new webpackPluginVersion(),
+      )
+    }
   },
   css: {
     loaderOptions: {
